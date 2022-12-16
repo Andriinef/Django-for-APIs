@@ -31,11 +31,16 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "whitenoise.runserver_nostatic",  # whitenoise
     "django.contrib.staticfiles",
     # 3rd Party
-    "crispy_forms",  # new
+    "crispy_forms",
+    "rest_framework",  # rest framework
     # Local
     "accounts.apps.AccountsConfig",  # accounts apps
+    "books.apps.BooksConfig",
+    "apis.apps.ApisConfig",
+    "todos.apps.TodosConfig",
 ]
 
 MIDDLEWARE = [
@@ -46,6 +51,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # whitenoise
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -75,7 +81,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     # "default": {
     #     "ENGINE": "django.db.backends.sqlite3",
-    #     "NAME": BASE_DIR / "db.sqlite3",
+    #     "NAME": ROOT_DIR / "db.sqlite3",
     # }
     "default": {
         "ENGINE": getenv("DB_ENGINE"),
@@ -86,6 +92,12 @@ DATABASES = {
         "PORT": getenv("DB_PORT"),
     }
 }
+
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # Password validation
@@ -121,14 +133,18 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
+# http://whitenoise.evans.io/en/stable/
 
-STATIC_URL = "/static/"
+STATIC_URL = "/src/static/"
 
-if DEBUG:
-    STATICFILES_DIRS = [ROOT_DIR / "static"]
+STATICFILES_DIRS = [ROOT_DIR / "src/static"]
 
-else:
-    STATIC_ROOT = ROOT_DIR / "staticfiles"
+STATIC_ROOT = ROOT_DIR / "src/staticfiles"
+
+STATICFILES_STORAGE = (
+    "whitenoise.storage.CompressedManifestStaticFilesStorage"  # whitenoise
+)
+
 
 MEDIA_URL = "/media/"
 
