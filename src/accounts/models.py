@@ -3,6 +3,8 @@ from django.db import models
 
 
 class CustomUser(AbstractUser):
+    name = models.CharField("Ім'я", null=True, blank=True, max_length=100)
+    email = models.EmailField(unique=True)
     age = models.PositiveIntegerField(
         "Вік", null=True, blank=True, help_text="Вкажить свій вік."
     )

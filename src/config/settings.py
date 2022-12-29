@@ -41,7 +41,15 @@ INSTALLED_APPS = [
     "books.apps.BooksConfig",
     "apis.apps.ApisConfig",
     "todos.apps.TodosConfig",
+    "posts.apps.PostsConfig",
 ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        # "rest_framework.permissions.AllowAny",
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -160,3 +168,9 @@ EMAIL_PORT = getenv("EMAIL_PORT")
 EMAIL_HOST_USER = getenv("EMAIL_USER")
 EMAIL_HOST_PASSWORD = getenv("EMAIL_PASS")
 EMAIL_USE_TLS = getenv("EMAIL_USE_TLS")
+
+
+ALPHA_VANTAGE_BASE_URL = getenv(
+    "ALPHA_VANTAGE_BASE_URL", default="https://www.alphavantage.co"
+)
+ALPHA_VANTAGE_API_KEY = getenv("ALPHA_VANTAGE_API_KEY", default="82I46WMYT3C7EX3J")
