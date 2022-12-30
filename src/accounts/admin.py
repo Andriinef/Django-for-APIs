@@ -1,9 +1,9 @@
 from django.contrib import admin
+from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 
 from accounts.forms import CustomUserChangeForm, CustomUserCreationForm
 from accounts.models import CustomUser
-from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
@@ -20,8 +20,27 @@ class CustomUserAdmin(UserAdmin):
         "is_staff",
         "is_active",
     ]
-    fieldsets = UserAdmin.fieldsets + ((None, {"fields": ("age",)}),)
-    add_fieldsets = UserAdmin.add_fieldsets + ((None, {"fields": ("age",)}),)
+    fieldsets = UserAdmin.fieldsets + (
+        (
+            None,
+            {
+                "fields": ("age",),
+            },
+        ),
+    )
+    add_fieldsets = UserAdmin.add_fieldsets + (
+        (
+            None,
+            {
+                "fields": (
+                    "email",
+                    "age",
+                    "is_staff",
+                    "is_active",
+                ),
+            },
+        ),
+    )
 
 
 # admin.site.register(CustomUser, CustomUserAdmin)

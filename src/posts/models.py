@@ -5,7 +5,9 @@ from django.db import models
 class Post(models.Model):
     title = models.CharField("Назва", max_length=50)
     body = models.TextField("Стаття")
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Автор")
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Автор"
+    )
     created_at = models.DateTimeField("Час публікації", auto_now_add=True)
     updated_at = models.DateTimeField("Час оновлення", auto_now=True)
 
