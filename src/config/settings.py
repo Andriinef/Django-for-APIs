@@ -33,9 +33,16 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "whitenoise.runserver_nostatic",  # whitenoise
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     # 3rd Party
     "crispy_forms",
     "rest_framework",  # rest framework
+    "rest_framework.authtoken",  # token authentication
+    "dj_rest_auth",     # rest auth
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "dj_rest_auth.registration",
     # Local
     "accounts.apps.AccountsConfig",  # accounts apps
     "books.apps.BooksConfig",
@@ -48,6 +55,12 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         # "rest_framework.permissions.AllowAny",
         "rest_framework.permissions.IsAuthenticated",
+    ],
+
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+        # "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
     ],
 }
 
@@ -75,10 +88,14 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.request",
             ],
         },
     },
 ]
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+SITE_ID = 1
 
 WSGI_APPLICATION = "config.wsgi.application"
 
@@ -160,14 +177,14 @@ MEDIA_ROOT = ROOT_DIR / "media"
 
 
 # email
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 # EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-DEFAULT_FROM_EMAIL = getenv("DEFAULT_FROM_EMAIL")
-EMAIL_HOST = getenv("EMAIL_HOST")
-EMAIL_PORT = getenv("EMAIL_PORT")
-EMAIL_HOST_USER = getenv("EMAIL_USER")
-EMAIL_HOST_PASSWORD = getenv("EMAIL_PASS")
-EMAIL_USE_TLS = getenv("EMAIL_USE_TLS")
+# DEFAULT_FROM_EMAIL = getenv("DEFAULT_FROM_EMAIL")
+# EMAIL_HOST = getenv("EMAIL_HOST")
+# EMAIL_PORT = getenv("EMAIL_PORT")
+# EMAIL_HOST_USER = getenv("EMAIL_USER")
+# EMAIL_HOST_PASSWORD = getenv("EMAIL_PASS")
+# EMAIL_USE_TLS = getenv("EMAIL_USE_TLS")
 
 
 ALPHA_VANTAGE_BASE_URL = getenv(
