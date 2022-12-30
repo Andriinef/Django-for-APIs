@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "rest_framework",  # rest framework
     "rest_framework.authtoken",  # token authentication
-    "dj_rest_auth",     # rest auth
+    "dj_rest_auth",  # rest auth
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -56,7 +56,6 @@ REST_FRAMEWORK = {
         # "rest_framework.permissions.AllowAny",
         "rest_framework.permissions.IsAuthenticated",
     ],
-
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.SessionAuthentication",
         # "rest_framework.authentication.BasicAuthentication",

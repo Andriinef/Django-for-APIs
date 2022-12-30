@@ -1,5 +1,5 @@
-from rest_framework import generics
 from django.contrib.auth import get_user_model
+from rest_framework import generics
 
 from .models import Post
 from .permissions import IsAuthorOrReadOnly
