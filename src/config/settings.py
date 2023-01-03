@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "dj_rest_auth.registration",
+    "drf_spectacular",
     # Local
     "accounts.apps.AccountsConfig",  # accounts apps
     "books.apps.BooksConfig",
@@ -61,6 +62,7 @@ REST_FRAMEWORK = {
         # "rest_framework.authentication.BasicAuthentication",
         "rest_framework.authentication.TokenAuthentication",
     ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 MIDDLEWARE = [
@@ -186,7 +188,14 @@ MEDIA_ROOT = ROOT_DIR / "media"
 # EMAIL_USE_TLS = getenv("EMAIL_USE_TLS")
 
 
-ALPHA_VANTAGE_BASE_URL = getenv(
-    "ALPHA_VANTAGE_BASE_URL", default="https://www.alphavantage.co"
-)
-ALPHA_VANTAGE_API_KEY = getenv("ALPHA_VANTAGE_API_KEY", default="82I46WMYT3C7EX3J")
+# ALPHA_VANTAGE_BASE_URL = getenv(
+#     "ALPHA_VANTAGE_BASE_URL", default="https://www.alphavantage.co"
+# )
+# ALPHA_VANTAGE_API_KEY = getenv("ALPHA_VANTAGE_API_KEY", default="82I46WMYT3C7EX3J")
+
+SPECTACULAR_SETTINGS = {
+"TITLE": "Blog API Project",
+"DESCRIPTION": "A sample blog to learn about DRF",
+"VERSION": "1.0.0",
+# OTHER SETTINGS
+}
